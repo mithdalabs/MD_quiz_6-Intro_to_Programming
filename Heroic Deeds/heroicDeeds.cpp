@@ -110,3 +110,5 @@ void searchByBranch(const vector<string>& deeds, const vector<string>& branches)
     // 1. Ask user for branch to search
     // 2. Loop through branches vector and display matching deeds
 }
+
+//this is just the demo on how to write commit messages
