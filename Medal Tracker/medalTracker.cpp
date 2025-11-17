@@ -58,9 +58,36 @@ int main() {
 // TODO: Implement displayBanner()
 // Hint: Print program title and Veterans Day tribute
 
+void displayBanner() {
+    cout << "========================================\n";
+    cout << "      VETERANS DAY TRIBUTE PROGRAM      \n";
+    cout << "========================================\n";
+    cout << "             MEDAL TRACKER\n";
+    cout << "========================================\n";
+    cout << "   Honoring Those Who Served Our Nation\n";
+    cout << "========================================\n\n";
+}
+
 // TODO: Implement addVeteran()
 // Hint: Ask for veteran's name, age, number of medals, and names of each medal
 // Ensure duplicate medals are NOT allowed
+void addVeteran(vector<Veteran>& veterans) {
+    Veteran tempEntry;
+    string veteranName;
+    int veteranAge, medalNum, tempMedalNum;
+    
+    cout << "\nEnter veteran's name: ";
+    getline(cin, veteranName); 
+    cout << "\nEnter veteran's age: ";
+    cin >> veteranAge;
+    cout << "\nEnter how many medals this veteran has: ";
+    cin >> medalNum;
+    
+    while (tempMedalNum != 0) {
+        
+    }
+    
+}
 
 // TODO: Implement displayVeterans()
 // Hint: Loop through the vector and print each veteran's name, age, and medals
