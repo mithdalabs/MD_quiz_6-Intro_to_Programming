@@ -1,6 +1,8 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include <algorithm> //for transform
+#include <cctype> //for tolower
 using namespace std;
 
 // Function prototypes
@@ -34,23 +36,23 @@ int main() {
 
         switch(choice) {
             case 1:
-                // TODO: Implement addHeroicDeed()
+                // TODO: Implement addHeroicDeed() - done
                 addHeroicDeed(heroicDeeds, serviceBranches);
                 break;
             case 2:
-                // TODO: Implement displayDeeds()
+                // TODO: Implement displayDeeds() - done
                 displayDeeds(heroicDeeds, serviceBranches);
                 break;
             case 3:
-                // TODO: Implement displayStatistics()
+                // TODO: Implement displayStatistics() - done
                 displayStatistics(heroicDeeds, serviceBranches);
                 break;
             case 4:
-                // TODO: Implement createPatrioticPattern()
+                // TODO: Implement createPatrioticPattern() - done
                 createPatrioticPattern();
                 break;
             case 5:
-                // TODO: Implement searchByBranch()
+                // TODO: Implement searchByBranch() - done
                 searchByBranch(heroicDeeds, serviceBranches);
                 break;
             case 6:
@@ -65,7 +67,7 @@ int main() {
     return 0;
 }
 
-// TODO: Implement the displayBanner() function
+// TODO: Implement the displayBanner() function - done
 void displayBanner() {
     cout << "========================================\n";
     cout << "      VETERANS DAY TRIBUTE PROGRAM      \n";
@@ -74,41 +76,131 @@ void displayBanner() {
     cout << "========================================\n\n";
 }
 
-// TODO: Implement addHeroicDeed() function
+// TODO: Implement addHeroicDeed() function - Done
 void addHeroicDeed(vector<string>& deeds, vector<string>& branches) {
     // Steps:
     // 1. Ask user to enter branch
     // 2. Ask user to describe heroic deed
     // 3. Store data in vectors
+    
+    string branchInput, deedInput;
+    
+    cout << "\n\nEnter the branch of the heroic deed: ";
+    getline(cin, branchInput);
+    branches.push_back(branchInput);
+    
+    cout << "\nDescribe the heroic deed: ";
+    getline(cin, deedInput);
+    deeds.push_back(deedInput);
 }
 
-// TODO: Implement displayDeeds() function
+// TODO: Implement displayDeeds() function - Done
 void displayDeeds(const vector<string>& deeds, const vector<string>& branches) {
     // Steps:
     // 1. Check if vectors are empty
     // 2. Loop through vectors and print deeds with branch
+    
+    if (deeds.empty() && branches.empty()) {
+        cout << "\nThere are no heroic deeds and branches to display!\n";
+    }
+    else if (deeds.size() != branches.size()) {
+        cout << "\nThere is an uneven amount!\n";
+    }
+    else {
+        for (int i = 0; i < deeds.size(); ++i) {
+                cout << deeds.at(i) << " - " << branches.at(i) << endl;
+        }
+    }
 }
 
-// TODO: Implement displayStatistics() function
+// TODO: Implement displayStatistics() function - Done
 void displayStatistics(const vector<string>& deeds, const vector<string>& branches) {
     // Steps:
     // 1. Count total deeds
     // 2. Count deeds by branch
     // 3. Display results
+    
+    int marinesCount = 0;
+    int coastCount = 0 ;
+    int navyCount = 0;
+    int spaceCount = 0;
+    int armyCount = 0;
+    int airforceCount = 0;
+    
+    for (const string&s : branches) {
+        string tempBranch = s;
+        transform(tempBranch.begin(), tempBranch.end(), tempBranch.begin(), [](unsigned char c){return tolower(c);}); 
+        if (tempBranch == "marines" || tempBranch == "marine corps" || tempBranch == "marine") {
+            marinesCount++;
+        }
+        else if (tempBranch == "coast guard" || tempBranch == "coast") {
+            coastCount++;
+        }
+        else if (tempBranch == "navy" || tempBranch == "sailor") {
+            navyCount++;
+        }
+        else if (tempBranch == "space force" || tempBranch == "guardian" || tempBranch == "guardians") {
+            spaceCount++;
+        }
+        else if (tempBranch == "army" || tempBranch == "gi" || tempBranch == "g.i." || tempBranch == "soldier") {
+            armyCount++;
+        } 
+        else if (tempBranch == "air force" || tempBranch == "airman") {
+            airforceCount++;
+        }
+    }
+    
+    cout << "\nTotal deeds: " << deeds.size() << endl;
+    cout << "Marines: " << marinesCount << endl;
+    cout << "Army: " << armyCount << endl;
+    cout << "Navy: " << navyCount << endl;
+    cout << "Air Force: " << airforceCount << endl;
+    cout << "Coast Guard: " << coastCount << endl;
+    cout << "Space Force: " << spaceCount << endl;
 }
 
-// TODO: Implement createPatrioticPattern() function
+// TODO: Implement createPatrioticPattern() function - 
 void createPatrioticPattern() {
     // Steps:
     // 1. Ask user for number of rows
     // 2. Use loops to print a pattern (★, ●, ▲)
+    
+    int rows;
+    cout << "\nHow many rows would you like? ";
+    cin >> rows;
+    if (rows == 0) {
+        cout << "\nNo rows to be displayed.\n";
+        return;
+    }
+    
+    else {
+        while (rows != 0) {
+            cout << "\n\n★~●~▲~★~●~▲~●~▲~★~●~▲~●~▲~★~●~▲~●~▲~★~●~▲~●~▲~★~●~▲\n";
+            rows--;
+        }
+    }
+    
 }
 
-// TODO: Implement searchByBranch() function
+// TODO: Implement searchByBranch() function - Done, could be improved
 void searchByBranch(const vector<string>& deeds, const vector<string>& branches) {
     // Steps:
     // 1. Ask user for branch to search
     // 2. Loop through branches vector and display matching deeds
+    string searchTerm;
+    int searchCount = 0;
+    cout << "\nEnter the branch you want to view the heroic deeds of: ";
+    getline(cin, searchTerm);
+    
+    cout << "\nHeroic deeds of the: " << searchTerm << endl;
+    
+    for (int i = 0; i < branches.size(); ++i) {
+        if (branches.at(i) == searchTerm) {
+            cout << deeds.at(i) << endl;
+            searchCount++;
+        }
+    }
+    if (searchCount == 0) {
+        cout << "No heroic deeds found for this branch.\n";
+    }
 }
-
-//this is just the demo on how to write commit messages
